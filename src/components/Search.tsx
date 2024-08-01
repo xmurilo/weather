@@ -1,11 +1,10 @@
-
-
 const Search = () => {
   return (
     <div>
-      Search
+      <input type="text" />
+      <button>Buscar</button>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
