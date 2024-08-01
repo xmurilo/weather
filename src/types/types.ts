@@ -13,15 +13,15 @@ export interface Weather {
 }
 
 export interface Main {
-  temp: number;
   feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  sea_level?: number;
   grnd_level?: number;
   humidity: number;
+  pressure: number;
+  sea_level?: number;
+  temp: number;
   temp_kf?: number;
+  temp_max: number;
+  temp_min: number;
 }
 
 export interface Wind {
@@ -73,22 +73,30 @@ export interface City {
 }
 
 export interface ForecastListItem {
-  dt: number;
-  main: Main;
-  weather: Weather[];
   clouds: Clouds;
-  wind: Wind;
-  visibility: number;
-  pop: number;
-  rain?: Rain;
-  sys: Sys;
+  dt: number;
   dt_txt: string;
+  main: Main;
+  pop: number;
+  sys: Sys;
+  visibility: number;
+  weather: Weather[];
+  wind: Wind;
+  rain?: Rain;
+  snow?: Rain;
 }
 
 export interface ForecastData {
-  cod: string;
-  message: number;
+  city: {
+    coord: Coord;
+    country: string;
+    id: number;
+    population: number;
+    sunrise: number;
+    sunset: number;
+    timezone: number;
+  };
   cnt: number;
-  list: ForecastListItem[];
-  city: City;
+  cod: string;
+  list: Array<ForecastListItem>;
 }
