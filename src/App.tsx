@@ -11,13 +11,11 @@ import Forecast from "./components/Forecast";
 import { Title } from "./AppStyles";
 
 // * Types
-import { WeatherData } from "./types/types";
-const initialWeatherData: WeatherData = {} as WeatherData;
-
+import { ForecastData, WeatherData } from "./types/types";
 function App() {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState<WeatherData>(initialWeatherData);
-  const [forecast, setForecast] = useState([]);
+  const [weather, setWeather] = useState<WeatherData>({} as WeatherData);
+  const [forecast, setForecast] = useState<ForecastData>({} as ForecastData);
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
 
@@ -68,7 +66,7 @@ function App() {
       <Title>Condições Climáticas</Title>
       <Search city={city} setCity={setCity} searchWeather={searchWeather} />
       <CurrentWeather weather={weather} />
-      {forecast.length > 0 && <Forecast forecasts={forecast} />}
+      {forecast.list && <Forecast forecasts={forecast.list} />}
     </>
   );
 }
