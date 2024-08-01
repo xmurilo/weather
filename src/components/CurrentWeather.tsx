@@ -8,7 +8,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weather }) => {
 
   return (
     <div>
-      <h3>nome</h3>
+      <h3>{weather.name}</h3>
       <img
         src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
         alt={weather.weather[0].description}
