@@ -11,7 +11,7 @@ import Forecast from "./components/Forecast";
 import { Title } from "./AppStyles";
 
 // * Types
-import { WeatherData } from "./types";
+import { WeatherData } from "./types/types";
 const initialWeatherData: WeatherData = {} as WeatherData;
 
 function App() {
@@ -46,13 +46,18 @@ function App() {
     setCity(name);
 
     try {
-      const response = await axios.get(
+      const responseWeather = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
       );
-      const weatherData = response.data;
-      console.log(weatherData);
+      const responseForecast = await axios.get(
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
+      );
+      const weatherData = responseWeather.data;
+      const forecastData = responseForecast.data;
+      console.log(forecastData);
 
       setWeather(weatherData);
+      setForecast(forecastData);
     } catch (error) {
       console.log("Erro:", error);
     }
@@ -63,7 +68,7 @@ function App() {
       <Title>Condições Climáticas</Title>
       <Search city={city} setCity={setCity} searchWeather={searchWeather} />
       <CurrentWeather weather={weather} />
-      <Forecast />
+      {forecast.length > 0 && <Forecast forecasts={forecast} />}
     </>
   );
 }
