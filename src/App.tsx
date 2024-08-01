@@ -1,3 +1,4 @@
+// * Libraries
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,10 +10,13 @@ import Forecast from "./components/Forecast";
 // * StyledComponents
 import { Title } from "./AppStyles";
 
+// * Types
+import { WeatherData } from "./types";
+const initialWeatherData: WeatherData = {} as WeatherData;
+
 function App() {
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState<WeatherData>(initialWeatherData);
   const [forecast, setForecast] = useState([]);
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
@@ -38,17 +42,17 @@ function App() {
   async function searchWeather() {
     const data = await getCoordinates(city);
     if (!data) return;
-    const { name, state, lat, lon } = data;
+    const { name, lat, lon } = data;
     setCity(name);
-    setState(state);
 
     try {
       const response = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
       );
-      const weather = response.data;
-      setWeather(weather);
-      console.log(weather);
+      const weatherData = response.data;
+      console.log(weatherData);
+
+      setWeather(weatherData);
     } catch (error) {
       console.log("Erro:", error);
     }
@@ -56,10 +60,9 @@ function App() {
 
   return (
     <>
-      <Title>Condições Climaticas</Title>
-      <h3></h3>
+      <Title>Condições Climáticas</Title>
       <Search city={city} setCity={setCity} searchWeather={searchWeather} />
-      <CurrentWeather />
+      <CurrentWeather weather={weather} />
       <Forecast />
     </>
   );
