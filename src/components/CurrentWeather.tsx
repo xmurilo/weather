@@ -1,4 +1,4 @@
-import { WeatherData } from "../types";
+import { WeatherData } from "../types/types";
 
 interface CurrentWeatherProps {
   weather: WeatherData;
