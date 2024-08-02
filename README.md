@@ -1,30 +1,78 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Weather App built with React and TypeScript that fetches weather data using the OpenWeather API. The app allows users to search for weather conditions by city and view the current weather as well as a forecast.
 
-Currently, two official plugins are available:
+## Built With
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [OpenWeather](https://openweathermap.org/) - Weather API
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Search for weather by city
+- Display current weather conditions
+- Show forecast for the next hours
+- Responsive design
 
-- Configure the top-level `parserOptions` property like this:
+## Screenshots
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+![alt text](image.png)
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/xmurilo/weather.git
+   cd weather
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env` file in the root of the project and add your OpenWeather API key:
+
+   ```env
+   VITE_API_KEY=your_openweather_api_key
+   ```
+
+### Running the App
+
+To start the development server, run:
+
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Open [http://localhost:5173/](http://localhost:5173/) to view it in the browser.
+
+## Project Structure
+
+- `src/` - Source code
+  - `components/` - React components
+  - `styles/` - Styled-components styles
+  - `types/` - TypeScript type definitions
+  - `utils/` - Utility functions
+  - `App.tsx` - Main app component
+  - `index.tsx` - Entry point
+
+## Usage
+
+1. Enter the name of a city in the search bar.
+2. Click on the "Get Weather" button.
+3. View the current weather and forecast.
