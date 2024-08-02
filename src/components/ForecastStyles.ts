@@ -9,7 +9,8 @@ export const ForecastContainer = styled.div`
   h4 {
     text-align: center;
     margin-bottom: 10px;
-    color: #333;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+
   }
   ul {
     list-style-type: none;
