@@ -1,4 +1,5 @@
 import { ForecastListItem } from "../types/types";
+import { capitalizeWords } from "../utils/captalizeWords";
 import { ForecastContainer } from "./ForecastStyles";
 
 interface ForecastProps {
@@ -6,9 +7,8 @@ interface ForecastProps {
 }
 
 const Forecast: React.FC<ForecastProps> = ({ forecasts }) => {
-  return (
-    <ForecastContainer>
-      <h4>Previão para as próximas horas</h4>
+  function renderForecasts(): JSX.Element {
+    return (
       <ul>
         {forecasts.map(forecast => (
           <li key={forecast.dt}>
@@ -16,10 +16,16 @@ const Forecast: React.FC<ForecastProps> = ({ forecasts }) => {
               src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
               alt={forecast.weather[0].description}
             />
-            {forecast.main.temp}ºC - {forecast.weather[0].description}
+            {forecast.main.temp}ºC - {capitalizeWords(forecast.weather[0].description)}
           </li>
         ))}
       </ul>
+    );
+  }
+  return (
+    <ForecastContainer>
+      <h4>Previão para as próximas horas</h4>
+      {renderForecasts()}
     </ForecastContainer>
   );
 };
