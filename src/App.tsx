@@ -11,7 +11,7 @@ import CurrentWeather from "./components/CurrentWeather";
 import Forecast from "./components/Forecast";
 
 // * StyledComponents
-import { Title } from "./AppStyles";
+import { Title, WeatherContainer } from "./AppStyles";
 
 function App() {
   const [city, setCity] = useState("");
@@ -74,12 +74,12 @@ function App() {
   }
 
   return (
-    <>
+    <WeatherContainer>
       <Title>Condições Climáticas</Title>
       <Search city={city} setCity={setCity} searchWeather={searchWeather} />
       <CurrentWeather weather={weather} />
       {forecast.length > 0 && <Forecast forecasts={forecast} />}
-    </>
+    </WeatherContainer>
   );
 }
 
