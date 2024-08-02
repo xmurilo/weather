@@ -24,7 +24,7 @@ function App() {
     navigator.geolocation.getCurrentPosition(async position => {
       const { latitude, longitude } = position.coords;
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`,
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=pt_br&appid=${apiKey}&units=metric`,
       );
       const weatherData = response.data;
       setCity(response.data.name);
@@ -58,10 +58,10 @@ function App() {
 
     try {
       const responseWeather = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
+        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=pt_br&appid=${apiKey}&units=metric`,
       );
       const responseForecast = await axios.get(
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&lang=pt_br&appid=${apiKey}&units=metric`,
       );
       const weatherData = responseWeather.data;
       const forecastList = responseForecast.data.list.slice(0, 5);
