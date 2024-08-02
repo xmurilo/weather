@@ -1,4 +1,5 @@
 import { WeatherData } from "../types/types";
+import { capitalizeWords } from "../utils/captalizeWords";
 import { InfoWeather } from "./CurrentWeatherStyles";
 
 interface CurrentWeatherProps {
@@ -16,7 +17,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weather }) => {
       />
 
       <p>{weather.main.temp}ºC</p>
-      <p>{weather.weather[0].description}</p>
+      <p>{capitalizeWords(weather.weather[0].description)}</p>
     </InfoWeather>
   );
 };
