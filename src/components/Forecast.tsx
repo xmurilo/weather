@@ -1,14 +1,13 @@
 import { ForecastListItem } from "../types/types";
+import { ForecastContainer } from "./ForecastStyles";
 
 interface ForecastProps {
   forecasts: ForecastListItem[];
 }
 
 const Forecast: React.FC<ForecastProps> = ({ forecasts }) => {
-  console.log(forecasts);
-
   return (
-    <div>
+    <ForecastContainer>
       <h4>Previão para as próximas horas</h4>
       <ul>
         {forecasts.map(forecast => (
@@ -21,7 +20,7 @@ const Forecast: React.FC<ForecastProps> = ({ forecasts }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </ForecastContainer>
   );
 };
 
