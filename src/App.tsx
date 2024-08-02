@@ -1,5 +1,5 @@
 // * Libraries
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 // * Types
@@ -19,6 +19,18 @@ function App() {
   const [forecast, setForecast] = useState<ForecastListItem[]>([] as ForecastListItem[]);
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(async position => {
+      const { latitude, longitude } = position.coords;
+      const response = await axios.get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`,
+      );
+      const weatherData = response.data;
+      setCity(response.data.name);
+      setWeather(weatherData);
+    });
+  }, [apiKey]);
 
   async function getCoordinates(city: string) {
     try {
@@ -53,7 +65,6 @@ function App() {
       );
       const weatherData = responseWeather.data;
       const forecastList = responseForecast.data.list.slice(0, 5);
-      console.log(forecastList);
 
       setWeather(weatherData);
       setForecast(forecastList);
