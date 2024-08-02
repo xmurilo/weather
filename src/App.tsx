@@ -2,6 +2,9 @@
 import { useState } from "react";
 import axios from "axios";
 
+// * Types
+import { ForecastListItem, WeatherData } from "./types/types";
+
 // * Components
 import Search from "./components/Search";
 import CurrentWeather from "./components/CurrentWeather";
@@ -10,12 +13,10 @@ import Forecast from "./components/Forecast";
 // * StyledComponents
 import { Title } from "./AppStyles";
 
-// * Types
-import { ForecastData, WeatherData } from "./types/types";
 function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState<WeatherData>({} as WeatherData);
-  const [forecast, setForecast] = useState<ForecastData>({} as ForecastData);
+  const [forecast, setForecast] = useState<ForecastListItem[]>([] as ForecastListItem[]);
 
   const apiKey = import.meta.env.VITE_API_KEY || "";
 
@@ -51,11 +52,11 @@ function App() {
         `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
       );
       const weatherData = responseWeather.data;
-      const forecastData = responseForecast.data;
-      console.log(forecastData);
+      const forecastList = responseForecast.data.list.slice(0, 5);
+      console.log(forecastList);
 
       setWeather(weatherData);
-      setForecast(forecastData);
+      setForecast(forecastList);
     } catch (error) {
       console.log("Erro:", error);
     }
@@ -66,7 +67,7 @@ function App() {
       <Title>Condições Climáticas</Title>
       <Search city={city} setCity={setCity} searchWeather={searchWeather} />
       <CurrentWeather weather={weather} />
-      {forecast.list && <Forecast forecasts={forecast.list} />}
+      {forecast.length > 0 && <Forecast forecasts={forecast} />}
     </>
   );
 }
